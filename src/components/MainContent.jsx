@@ -22,9 +22,10 @@ const MainContent = () => {
   const globalLanguage = useSelector((state) => state.globalLanguage);
   const languageToUse = useSelector((state) => state.language);
   const difficulty = useSelector((state) => state.difficulty);
-
+  const [wordToGuess, setWordToGuess] = useState("");
   const navigate = useNavigate();
 
+  console.log(wordToGuess);
   const upperCaseLetters = [
     "A",
     "B",
@@ -62,6 +63,7 @@ const MainContent = () => {
       randomWord =
         arrayToUse[Math.floor(Math.random() * arrayToUse.length)].toUpperCase();
     }
+    setWordToGuess(randomWord);
     return randomWord.split("");
   };
 
@@ -93,9 +95,6 @@ const MainContent = () => {
   };
 
   console.log(checkWin());
-
-  console.log("guessed", guessedLetters);
-  console.log("words", wordArray);
 
   const setDisabled = (value) => {
     if (
@@ -157,6 +156,19 @@ const MainContent = () => {
           : "Lingua della parola: "}{" "}
         {languageToUse}
       </h5>
+      {checkWin() ? (
+        <h5 className="text-center">
+          {globalLanguage === "EN" ? "Word to guess was:" : "La parola era"} :{" "}
+          {wordToGuess}
+        </h5>
+      ) : errors === 7 ? (
+        <h5 className="text-center">
+          {globalLanguage === "EN" ? "Word to guess was:" : "La parola era"}{" "}
+          {wordToGuess}
+        </h5>
+      ) : (
+        ""
+      )}
       <Row className="border border-2 rounded-5 bg-white shadow text-black py-0 py-md-3">
         {errors === 7 ? (
           <Col className="text-center">
