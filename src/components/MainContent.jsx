@@ -135,6 +135,14 @@ const MainContent = () => {
     }
   };
 
+  const setStarsDifficulty = () => {
+    let arrayOfStars = [];
+    for (let i = 0; i < difficulty; i++) {
+      arrayOfStars.push(<i className="bi bi-star-fill text-warning"></i>);
+    }
+    return arrayOfStars;
+  };
+
   useEffect(() => {
     setWordArray(pickWord());
   }, []);
@@ -156,6 +164,10 @@ const MainContent = () => {
           : "Lingua della parola: "}{" "}
         {languageToUse}
       </h5>
+      <h6 className="text-center">
+        {globalLanguage === "EN" ? "Difficulty: " : "Difficoltà: "}{" "}
+        {setStarsDifficulty()}
+      </h6>
       {checkWin() ? (
         <h5 className="text-center">
           {globalLanguage === "EN" ? "Word to guess was:" : "La parola era"} :{" "}
@@ -220,7 +232,7 @@ const MainContent = () => {
         )}
       </Row>
       <Row className="justify-content-center flex-column align-items-center">
-        <h6 className="text-center mt-3">
+        <h6 className={`text-center mt-3 ${errors === 6 ? "heartbeat" : ""}`}>
           {globalLanguage === "EN" ? "Errors :" : "Errori:"} {errors}/7
         </h6>
         <Col className="text-center">
