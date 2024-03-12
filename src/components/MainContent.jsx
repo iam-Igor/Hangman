@@ -25,7 +25,6 @@ const MainContent = () => {
   const [wordToGuess, setWordToGuess] = useState("");
   const navigate = useNavigate();
 
-  console.log(wordToGuess);
   const upperCaseLetters = [
     "A",
     "B",
@@ -94,8 +93,6 @@ const MainContent = () => {
     return wordArray.every((l) => guessedLetters.includes(l));
   };
 
-  console.log(checkWin());
-
   const setDisabled = (value) => {
     if (
       usedLetters.includes(value) ||
@@ -108,8 +105,6 @@ const MainContent = () => {
       return false;
     }
   };
-
-  console.log(usedLetters);
 
   const checkError = () => {
     switch (errors) {
